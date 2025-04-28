@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     echo "Building Docker Image...."
-                    sh "docker build -t ${ImageRegistry}/${JOB_NAME}:${BUILD_NUMBER} ."
+                    sh "docker build --platform linux/amd64  -t ${ImageRegistry}/${JOB_NAME}:${BUILD_NUMBER} ."
                 }
             }
         }
