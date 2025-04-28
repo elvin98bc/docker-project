@@ -14,7 +14,7 @@ pipeline {
         stage("buildImage") {
             steps {
                 script {
-                    echo "Building Docker Image..."
+                    echo "Building Docker Image...."
                     sh "docker build -t ${ImageRegistry}/${JOB_NAME}:${BUILD_NUMBER} ."
                 }
             }
