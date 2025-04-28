@@ -35,7 +35,7 @@ pipeline {
         stage("deployCompose") {
             steps {
                 script {
-                    echo "Deploying with Docker Compose..."
+                    echo "Deploying with Docker Compose...."
                     sshagent(['ec2']) {
                         // Upload files once to reduce redundant SCP commands
                         sh """
