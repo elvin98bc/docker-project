@@ -9,7 +9,7 @@ pipeline {
         EC2_IP = '13.215.46.190'
         DockerComposeFile = 'docker-compose.yml'
         DotEnvFile = '.env' 
-        DockerImageTag = "${ImageRegistry}/${JOB_NAME}:${BUILD_NUMBER}"
+        DockerImageTag = '${ImageRegistry}/${JOB_NAME}:${BUILD_NUMBER}'
     }
 
     stages {
