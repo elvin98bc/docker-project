@@ -3,6 +3,7 @@
 def buildImage() {
     echo "Building Docker Image..."
     sh "docker build --platform linux/amd64 -t ${ImageRegistry}/${JOB_NAME}:${BUILD_NUMBER} ."
+    writeFile file: '.env', text: "BUILD_NUMBER=${BUILD_NUMBER}\n"
 }
 
 def pushImage() {
@@ -19,7 +20,7 @@ def deployCompose() {
         sh """
         scp -o StrictHostKeyChecking=no ${DotEnvFile} ${DockerComposeFile} ubuntu@${EC2_IP}:/home/ubuntu
         ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} "docker compose -f /home/ubuntu/${DockerComposeFile} --env-file /home/ubuntu/${DotEnvFile} down"
-        ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} "BUILD_NUMBER=${BUILD_NUMBER} docker compose -f /home/ubuntu/${DockerComposeFile} up -d"
+        ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} "docker compose -f /home/ubuntu/${DockerComposeFile} --env-file /home/ubuntu/${DotEnvFile} up -d"
         """
     }
 }
