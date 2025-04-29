@@ -3,7 +3,7 @@
 def buildImage() {
     echo "Building Docker Image..."
     sh "docker build --platform linux/amd64 -t ${ImageRegistry}/${JOB_NAME}:${BUILD_NUMBER} ."
-    writeFile file: '.env', text: "BUILD_NUMBER=${BUILD_NUMBER}\n"
+    sh "echo BUILD_NUMBER=${BUILD_NUMBER} >> .env"
 }
 
 def pushImage() {
