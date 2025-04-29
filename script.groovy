@@ -20,7 +20,7 @@ def deployCompose() {
         scp -o StrictHostKeyChecking=no ${DotEnvFile} ${DockerComposeFile} ubuntu@${EC2_IP}:/home/ubuntu
         ssh -o StrictHostKeyChecking=no ubuntu@${EC2_IP} "
             export DC_IMAGE_NAME=${DockerImageTag} && \
-            echo $DC_IMAGE_NAME && \
+            echo ${DC_IMAGE_NAME} && \
             docker compose -f /home/ubuntu/${DockerComposeFile} --env-file /home/ubuntu/${DotEnvFile} down && \
             docker compose -f /home/ubuntu/${DockerComposeFile} --env-file /home/ubuntu/${DotEnvFile} up -d
         "
