@@ -7,7 +7,7 @@ def buildImage() {
 
 def pushImage() {
     echo "Pushing Image to DockerHub..."
-    withCredentials([usernamePassword(credentialsId: 'docker-login', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+    withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
         sh "echo $PASS | docker login -u $USER --password-stdin"
         sh "docker push ${ImageRegistry}/${JOB_NAME}:${BUILD_NUMBER}"
     }
